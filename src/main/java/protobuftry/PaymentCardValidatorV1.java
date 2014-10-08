@@ -1,17 +1,20 @@
 package protobuftry;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
+
 /**
  *
  */
 public class PaymentCardValidatorV1 {
     
-    public Object preValidate(Object card) {
-        int cardNumber = card.hashCode();
-        if (cardNumber % 2 == 0) {
-            // approve
-            return card;
+    public Message preValidate(byte[] bytes) throws InvalidProtocolBufferException {
+        Object card = bytes;
+        long cardNumber = card.hashCode();
+        if (cardNumber % 2 == 0) {            
+            return null;
         } else {
-            return card;
+            return null;
         }
     }
 
