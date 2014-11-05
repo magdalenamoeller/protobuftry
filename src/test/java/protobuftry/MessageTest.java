@@ -32,10 +32,10 @@ public class MessageTest {
 
     @Test
     public void messagesMustWorkWithAllServiceVersions() throws InvalidProtocolBufferException {
-        Message out1 = serviceV1.preValidate(testData.toByteArray());
-        assertProperties(testData, out1, 0);
-        Message out2 = serviceV2.preValidate(testData.toByteArray());
-        assertProperties(testData, out2, 0);
+        byte[] out1 = serviceV1.preValidate(testData.toByteArray());
+        assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 0);
+        byte[] out2 = serviceV2.preValidate(testData.toByteArray());
+        assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 0);
     }
     
     private void assertProperties(Message msg1, Message msg2, int ignoreField) {
