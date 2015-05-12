@@ -1,0 +1,9 @@
+package protobuftry;
+
+option java_package = "protobuftry";
+
+message Card {
+ required string cardNumber = 1;
+ optional bool preValidated = 2;
+}
+

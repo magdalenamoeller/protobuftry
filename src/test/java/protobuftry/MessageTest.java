@@ -23,17 +23,19 @@ public class MessageTest {
     
     @Parameter
     public Message testData;
-    
+
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                {Payment.Card.newBuilder().setCardNumber("123456789").build() },
+                {PaymentV2.Card.newBuilder().setCardNumber("1234444").setCardHolderName("Tim").build()}
         });
     }
 
     @Test
     public void messagesMustWorkWithAllServiceVersions() throws InvalidProtocolBufferException {
         byte[] out1 = serviceV1.preValidate(testData.toByteArray());
-        assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 0);
+        assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 2); //2 is a position in a protobuf
         byte[] out2 = serviceV2.preValidate(testData.toByteArray());
         assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 0);
     }
