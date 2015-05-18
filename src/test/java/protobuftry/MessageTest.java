@@ -37,7 +37,7 @@ public class MessageTest {
         byte[] out1 = serviceV1.preValidate(testData.toByteArray());
         assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 2); //2 is a position in a protobuf
         byte[] out2 = serviceV2.preValidate(testData.toByteArray());
-        assertProperties(testData, testData.newBuilderForType().mergeFrom(out1).build(), 0);
+        assertProperties(testData, testData.newBuilderForType().mergeFrom(out2).build(), 0);
     }
     
     private void assertProperties(Message msg1, Message msg2, int ignoreField) {
